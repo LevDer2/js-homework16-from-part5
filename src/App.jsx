@@ -1,122 +1,98 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+// ! OLD
 
-function App() {
-  const [count, setCount] = useState(0)
+// import React, { useState } from "react";
+
+// export default function App() {
+//   const [good, setGood] = useState(0);
+//   const [neutral, setNeutral] = useState(0);
+//   const [bad, setBad] = useState(0);
+//   const total = good + neutral + bad;
+//   const counPositiveFeedbackPercentage = total > 0 ? Math.round((good / total) * 100) : 0;
+//   const handlePlusGood = () => {
+//     return setGood(good + 1);
+//   };
+//   const handlePlusNeutral = () => {
+//     return setNeutral(neutral + 1);
+//   };
+//   const handlePlusBad = () => {
+//     return setBad(bad + 1);
+//   };
+//   return (
+//     <div>
+//       <h1>Please give a feedback</h1>
+//       <div>
+//         <button onClick={handlePlusGood} type="button">
+//           Good
+//         </button>
+//         <button onClick={handlePlusNeutral} type="button">
+//           Neutral
+//         </button>
+//         <button onClick={handlePlusBad} type="button">
+//           Bad
+//         </button>
+//       </div>
+//       <div>
+//         <div>
+//           <h2 className="subtitle">Statistics</h2>
+//           <p>Good: {good} </p>
+//           <p>Neutral: {neutral} </p>
+//           <p>Bad:{bad} </p>
+//           <p>Total: {total}</p>
+//           <p>Positive feedback: {counPositiveFeedbackPercentage} %</p>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
+
+// ! NEW
+import React, { useState } from "react";
+import FeedbackOptions from "./components/FeedbackOptions/FeedbackOptions";
+import Statistics from "./components/Statistics/Statistics";
+import Section from "./components/Section/Section";
+import "./App.css";
+
+export default function App() {
+  const [good, setGood] = useState(0);
+  const [neutral, setNeutral] = useState(0);
+  const [bad, setBad] = useState(0);
+
+  const total = good + neutral + bad;
+
+  const counPositiveFeedbackPercentage =
+    total > 0 ? Math.round((good / total) * 100) : 0;
+
+  const handlePlusGood = () => {
+    setGood(good + 1);
+  };
+
+  const handlePlusNeutral = () => {
+    setNeutral(neutral + 1);
+  };
+
+  const handlePlusBad = () => {
+    setBad(bad + 1);
+  };
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <main className="page">
+      <div className="feedback-card">
+        <Section title="Please leave feedback about our coffee" />
 
-      <div className="ticks"></div>
+        <FeedbackOptions
+          handlePlusGood={handlePlusGood}
+          handlePlusNeutral={handlePlusNeutral}
+          handlePlusBad={handlePlusBad}
+        />
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+        <Statistics
+          good={good}
+          neutral={neutral}
+          bad={bad}
+          total={total}
+          counPositiveFeedbackPercentage={counPositiveFeedbackPercentage}
+        />
+      </div>
+    </main>
+  );
 }
-
-export default App
