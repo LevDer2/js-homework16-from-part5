@@ -1,12 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
 
-export default function Statistics({
-  good,
-  neutral,
-  bad,
-  total,
-  counPositiveFeedbackPercentage,
-}) {
+export default function Statistics({}) {
+  const { good, neutral, bad, total, counPositiveFeedbackPercentage } =
+    useContext(AuthContext);
   return (
     <div className="statistics">
       {total === 0 ? (

@@ -51,47 +51,17 @@ import FeedbackOptions from "./components/FeedbackOptions/FeedbackOptions";
 import Statistics from "./components/Statistics/Statistics";
 import Section from "./components/Section/Section";
 import "./App.css";
+import { AuthProvider } from "./context/AuthContext";
 
 export default function App() {
-  const [good, setGood] = useState(0);
-  const [neutral, setNeutral] = useState(0);
-  const [bad, setBad] = useState(0);
-
-  const total = good + neutral + bad;
-
-  const counPositiveFeedbackPercentage =
-    total > 0 ? Math.round((good / total) * 100) : 0;
-
-  const handlePlusGood = () => {
-    setGood(good + 1);
-  };
-
-  const handlePlusNeutral = () => {
-    setNeutral(neutral + 1);
-  };
-
-  const handlePlusBad = () => {
-    setBad(bad + 1);
-  };
-
   return (
     <main className="page">
       <div className="feedback-card">
-        <Section title="Please leave feedback about our coffee" />
-
-        <FeedbackOptions
-          handlePlusGood={handlePlusGood}
-          handlePlusNeutral={handlePlusNeutral}
-          handlePlusBad={handlePlusBad}
-        />
-
-        <Statistics
-          good={good}
-          neutral={neutral}
-          bad={bad}
-          total={total}
-          counPositiveFeedbackPercentage={counPositiveFeedbackPercentage}
-        />
+        <AuthProvider>
+          <Section />
+          <FeedbackOptions />
+          <Statistics />
+        </AuthProvider>
       </div>
     </main>
   );

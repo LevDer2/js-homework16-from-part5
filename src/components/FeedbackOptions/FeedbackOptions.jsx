@@ -1,10 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
 
-export default function FeedbackOptions({
-  handlePlusGood,
-  handlePlusNeutral,
-  handlePlusBad,
-}) {
+export default function FeedbackOptions({}) {
+  const { handlePlusGood, handlePlusNeutral, handlePlusBad } = useContext(AuthContext);
   return (
     <div className="buttons">
       <button className="btn good" onClick={handlePlusGood} type="button">
